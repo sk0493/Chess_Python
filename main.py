@@ -12,7 +12,7 @@ images = {} # global dictionary of images
 
 def load_images():
     # Using pygame to load in the chess images
-    pieces = ["bR", "bN", "bB", "bQ", "bK", "bN", "bR", "bP", "wR", "wN", "wB", "wQ", "wK", "wN", "wR"]
+    pieces = ["bR", "bN", "bB", "bQ", "bK", "bN", "bP", "wN", "wB", "wQ", "wK", "wN", "wR", "wP"]
     for piece in pieces:
         images[piece] = pg.transform.scale(pg.image.load("images/" + piece + ".png"), (sq_size,sq_size))
 
@@ -22,20 +22,28 @@ def draw_game_state(screen, gs):
     Responsible for all the graphics whtin a current game state. 
     Draws the checkers on the board and pieces.
     '''
-    draw_board(screen)
-    draw_pieces(screen, gs.board) # draw chess pieces on top of board
+    draw_board(screen, gs.board)
+    #draw_pieces(screen, gs.board) # draw chess pieces on top of board
 
 
-def draw_board(screen):
+def draw_board(screen, board):
     colours = [pg.Color("white"), pg.Color("brown")]
     for row in range(dimension):
         for column in range(dimension):
             colour = colours[((row+column) % 2)]
             pg.draw.rect(screen, colour, pg.Rect(column*sq_size, row*sq_size, sq_size, sq_size))
+            piece = board[row][column]
+            if piece != "--": # not empty cell
+                screen.blit(images[piece], pg.Rect(column*sq_size, row*sq_size, sq_size,sq_size))
 
 
-def draw_pieces(screen, board):
-    pass
+# def draw_pieces(screen, board):
+#     for row in range(dimension):
+#         for column in range(dimension):
+#             piece = board[row][column]
+#             if piece != "--": # not empty cell
+#                 screen.blit(images[piece], pg.Rect(column*sq_size, row*sq_size, sq_size,sq_size))
+
 
 def main():
     '''
