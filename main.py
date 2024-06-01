@@ -7,7 +7,7 @@ pg.init()
 
 width = height = 400
 dimension = 8 # dimension of a chess board is 8x8
-sq_size = width / height
+sq_size = height / dimension
 images = {} # global dictionary of images
 
 def load_images():
@@ -23,7 +23,7 @@ def draw_game_state(screen, gs):
     Draws the checkers on the board and pieces.
     '''
     draw_board(screen)
-    draw_pieces(screen, gs.board)
+    draw_pieces(screen, gs.board) # draw chess pieces on top of board
 
 
 def draw_board(screen):
@@ -45,7 +45,7 @@ def main():
     screen = pg.display.set_mode((width,height))
     clock = pg.time.Clock()
     screen.fill(pg.Color("white"))
-    gs = engine.game_state
+    gs = engine.game_state()
     load_images()
     running = True
     while running:
@@ -59,7 +59,7 @@ def main():
 
 
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     main()
 
     
