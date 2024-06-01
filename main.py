@@ -27,7 +27,7 @@ def draw_game_state(screen, gs):
 
 
 def draw_board(screen):
-    colours = [pg.Color("white"), pg.Color("black")]
+    colours = [pg.Color("white"), pg.Color("brown")]
     for row in range(dimension):
         for column in range(dimension):
             colour = colours[((row+column) % 2)]
